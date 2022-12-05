@@ -63,8 +63,9 @@ void menu_utama(){
 	scanf("%d", &result);
 		switch (result){
 			case 1 :
-				system("cls");
-				printf("ini kalkulasi");//Placeholder, Ganti dengan function kalkulasi yang bakal ngitung dan nyimpan data, nanti di akhir function mungkin bisa ditambahkan saran untuk user 
+			menu_kalkulasi();
+				system("CLS");
+				//Placeholder, Ganti dengan function kalkulasi yang bakal ngitung dan nyimpan data, nanti di akhir function mungkin bisa ditambahkan saran untuk user 
 				break;
 			case 2 : 
 			system("cls");
@@ -91,27 +92,37 @@ void menu_kalkulasi(){
 //Rumus : kwh = kw x h 
 //		  co2 = kwh x co2/h
 //		  Rp  = kwh x Rp/kwh
-typedef struct input{
-	char devicename [50];
-	float kw;
-	float h;
-	float co2_h;
-	int rp_kwh;
-}device;
-	int counter, continuation;
-	int* biaya;
-	int* co2;
-	biaya = (int *) calloc (1, sizeof(int));
-	co2 = (int *) calloc (1, sizeof(int));
-	
-	continuation = 1;
-	while (continuation==1){
-		//ini buat input data
-	}
-	printf("CALCULATION\n\n");
-	printf("Menghitung Emisi CO2 per Jam");
-	printf("");//ini ngeprint hasil data
+	typedef struct {
+			char devicename [50];
+			float kw;
+			float h;
+			float co2_h;
+			int rp_kwh;
+		}device;
+
+			device *ptrdev;
+			int n, i;
+			printf("Masukkan jumlah device yang ingin dihitung: ");
+			scanf("%d", &n);
+
+			ptrdev = (device*) calloc(n,sizeof(device));
+
+			for(i = 0; i < n; i++){
+					printf("Nama device %d: ", i+1);
+					scanf(" %[^\n]", (ptrdev+i)->devicename);
+
+					printf("kw dari device: ");
+					scanf("%f", &(ptrdev+i)->kw);
+
+					printf("Waktu penggunaan device perharinya (dalam jam): ");
+					scanf("%d", &(ptrdev+i)->h);
+
+					printf("Harga listrik di rumah per kwh (rupiah): ");
+					scanf("%d", &(ptrdev+i)->rp_kwh);
+			}
+
 }
+
 
 //Function untuk submenu help
 void menu_help(){
